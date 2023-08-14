@@ -152,21 +152,21 @@ ruta.get('/iniciar_sesion', verificarSesion, function(req, res) {
 ruta.get('/', verificarSesion, async function(req, res) {
   try {
     var productos = await Producto.findAll({
-      limit: 5,  // Limita la consulta a los últimos 5 productos
-      order: [['createdAt', 'DESC']],  // Ordena por fecha de creación descendente
+      limit: 5,
+      order: [['createdAt', 'DESC']],
     });
 
     if (productos.length === 0) {
-      // Si no hay productos, renderiza la vista 'sin_productos'
       return res.render('sin_productos');
     }
 
-    res.render('inicio', { productos }); // Renderiza la vista 'inicio' y pasa los productos como datos
+    res.render('inicio', { productos });
   } catch (error) {
     console.error('Error al obtener los productos:', error);
     res.status(500).send('Error interno del servidor');
   }
 });
+
 
 function verificarSesion(req, res, next) {
   if (req.session && req.session.usuario) {
