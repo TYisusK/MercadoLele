@@ -3,7 +3,7 @@ var path = require('path');
 var usuariosRutas = require('./routes/usuarios');
 var cookieSession = require('cookie-session');
 var multer = require('multer'); // Importa la biblioteca multer
-var { conexion } = require('./conexion'); // Importa la conexión
+const { conexion } = require('./conexion'); // Importa la conexión
 
 require('dotenv').config();
 
