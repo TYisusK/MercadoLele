@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Página de Inicio</title>
+  <link rel="stylesheet" href="/ruta/a/tu/estilo.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.theme.default.min.css">
+  <link rel="stylesheet" href="/web/css/inicio.css">
+</head>
+<body>
+  <%- include('templates/header') %>
+
+  <div class="Eslogan">
+    <h2>Tradición en cada creación</h2>
+  </div>
+
+  <div class="carousel">
+    <div class="owl-carousel owl-theme">
+      <% productos.forEach(producto => { %>
+        <div class="item">
+          <img src="/web/uploads/productos/<%= producto.fotoProducto %>" alt="<%= producto.nombre %>">
+        </div>
+      <% }); %>
+    </div>
+  </div>
+
+  <div class="products">
+    <% productos.forEach(producto => { %>
+      <div class="product-card">
+        <img src="/web/uploads/productos/<%= producto.fotoProducto %>" alt="<%= producto.nombre %>">
+        <h3><%= producto.nombre %></h3>
+        <p><%= producto.descripcion %></p>
+        <p>Precio: $<%= producto.precio %></p>
+        
+        <form action="/agregar_al_carrito" method="post" >
+          <input type="hidden" name="productoId" value="<%= producto.id %>">
+          <button type="submit" class="botonCarrito">Agregar al Carrito</button>
+        </form>
+        
+        <% if (usuario && usuario.tipoUsuario === 'Administrador') { %>
+          <!-- Botón de eliminación solo visible para usuarios administradores -->
+          <form action="/eliminar_producto" method="post">
+            <input type="hidden" name="productoId" value="<%= producto.id %>">
+            <button type="submit" class="botonEliminar">Eliminar Producto</button>
+          </form>
+        <% } %>
+      </div>
+    <% }); %>
+  </div>
+
+  <%- include('templates/footer') %>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+  <script src="/web/js/inicio.js"></script>
+</body>
+</html>

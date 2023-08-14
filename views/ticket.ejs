@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Ticket de Compra</title>
+</head>
+<body>
+  <h1>Ticket de Compra</h1>
+
+  <h2>Productos en el Carrito:</h2>
+  <ul>
+    <% if (carritoProductos && carritoProductos.length > 0) { %>
+        <h1>Ticket de Compra</h1>
+        <ul>
+          <% carritoProductos.forEach(function(item) { %>
+            <li>
+              Producto: <%= item.producto ? item.producto.nombre : "Nombre no disponible" %><br>
+              Cantidad: <%= item.cantidad %><br>
+            </li>
+          <% }) %>
+        </ul>
+        <p>Total: <%= total %></p>
+      <% } else { %>
+        <p>No hay productos en el carrito.</p>
+      <% } %>
+      
+  </ul>
+
+  <h2>Total de la Compra: <%= total %> </h2>
+
+  <form action="/aceptar_compra" method="post">
+    <input type="submit" value="Aceptar y Regresar al Inicio">
+  </form>
+</body>
+</html>

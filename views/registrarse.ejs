@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarse</title>
+  <link rel="stylesheet" href="/web/css/registrarse.css">
+  
+</head>
+<body>
+  <% include('templates/header') %>
+
+  <div class="container">
+    <h1>Registrarse</h1>
+    <% if (error) { %>
+      <p class="error-message"><%= error %></p>
+    <% } %>
+    <form action="/registrarse" method="POST" enctype="multipart/form-data">
+      <label for="nombre">Nombre:</label>
+      <input type="text" id="nombre" name="nombre" required>
+      <label for="username">Nombre de usuario:</label>
+      <input type="text" id="username" name="username" required>
+      <label for="sexo">Sexo:</label>
+      <select id="sexo" name="sexo" required>
+        <option value="Masculino">Masculino</option>
+        <option value="Femenino">Femenino</option>
+        <option value="Otro">Otro</option>
+      </select>
+      <label for="edad">Edad:</label>
+      <input type="number" id="edad" name="edad" required>
+      <label for="password">Contraseña:</label>
+      <input type="password" id="password" name="password" required>
+      <label for="fotoPerfil">Foto de perfil:</label>
+      <input type="file" id="fotoPerfil" name="fotoPerfil">
+      <label for="tipoUsuario">Tipo de usuario:</label>
+      <select id="tipoUsuario" name="tipoUsuario" required>
+        <option value="Normal">Usuario Normal</option>
+        <option value="Administrador">Administrador</option>
+      </select>
+      <!-- Agrega un campo oculto para indicar si se requiere una clave especial -->
+      <input type="hidden" id="requiereClaveEspecial" name="requiereClaveEspecial" value="false">
+      <div id="claveEspecialContainer">
+        <label for="claveEspecial">Clave Especial:</label>
+        <input type="password" id="claveEspecial" name="claveEspecial">
+      </div>
+      <button type="submit">Registrarse</button>
+    </form>
+  </div>
+
+  <% include("templates/footer"); %>
+
+  <script src="/web/js/registrar.js"></script>
+</body>
+</html>

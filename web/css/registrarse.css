@@ -1,0 +1,57 @@
+/* Estilos generales */
+*{
+  font-family: Arial, sans-serif;
+}
+
+
+
+body {
+    
+    margin: 0;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    padding: 0;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    background-color: #f0f0f0;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Formulario */
+  form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  label {
+    font-weight: bold;
+  }
+  
+  input,
+  select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  button {
+    background-color: #FF80AB;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #ca2d61;
+  }

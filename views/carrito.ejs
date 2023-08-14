@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Carrito de Compras</title>
+  <link rel="stylesheet" href="/ruta/a/tu/estilo.css">
+  <link rel="stylesheet" href="/web/css/carrito.css"> <!-- Asegúrate de tener un estilo para el carrito -->
+</head>
+<body>
+  <%- include('templates/header') %>
+
+  <h1>Carrito de Compras</h1>
+
+  <div class="carrito-container">
+    <% if (carritoProductos.length === 0) { %>
+      <p>El carrito está vacío.</p>
+    <% } else { %>
+      <table>
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio Unitario</th>
+            <th>Subtotal</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% carritoProductos.forEach(item => { %>
+            <tr>
+              <td><%= item.producto.nombre %></td>
+              <td>
+                <form action="/actualizar_cantidad" method="post">
+                  <input type="hidden" name="productoId" value="<%= item.producto.id %>">
+                  <input type="number" name="cantidad" value="<%= item.cantidad %>" min="1">
+                  <button type="submit">Actualizar</button>
+                </form>
+              </td>
+              <td><%= item.producto.precio %></td>
+              <td><%= item.cantidad * item.producto.precio %></td>
+              <td>
+                <form action="/eliminar_del_carrito" method="post">
+                  <input type="hidden" name="productoId" value="<%= item.producto.id %>">
+                  <button type="submit">Eliminar</button>
+                </form>
+              </td>
+            </tr>
+          <% }); %>
+        </tbody>
+      </table>
+      <p class="total">Total: <%= carritoProductos.reduce((total, item) => total + (item.cantidad * item.producto.precio), 0) %></p>
+      <form action="/comprar" method="post">
+        <button type="submit">Comprar</button>
+      </form>
+    <% } %>
+  </div>
+
+  <% include('templates/footer') %>
+</body>
+</html>

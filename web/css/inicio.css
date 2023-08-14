@@ -1,0 +1,94 @@
+/* Ajustes generales */
+* {
+  font-family: Arial, sans-serif;
+}
+
+body {
+  font-size: 18px;
+  background-color: #ebebeb;
+  color: #333;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estilos para el carrusel */
+.carousel {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+.owl-carousel .owl-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.5s ease-in-out;
+}
+
+.owl-carousel .owl-item.active img {
+  opacity: 1;
+}
+
+.owl-carousel .owl-item:not(.active) img {
+  opacity: 0.7;
+}
+
+/* Estilos para el eslogan */
+.Eslogan {
+  text-align: center;
+  margin: 10px 0;
+  padding: 20px;
+  background-image: url('/web/images/margen.png');
+  background-size: cover; /* La imagen se ajusta y cubre todo el div */
+  background-position: center;
+  color: white; /* Cambiar el color del texto para que sea legible en la imagen */
+  border-radius: 10px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.Eslogan h2 {
+  font-size: 24px; 
+  color: #333; 
+  margin: 0; 
+}
+
+/* Estilos para el botón Agregar al Carrito */
+.botonCarrito {
+  background-color: #FF80AB;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.botonCarrito:hover {
+  background-color: #ca2d61;
+}
+
+/* Estilos para las tarjetas de producto */
+.product-card {
+  width: calc(25% - 20px);
+  margin: 10px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  text-align: center;
+  font-size: 20px;
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.product-card img {
+  max-width: 100%;
+  height: auto;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}

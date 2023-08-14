@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="/web/css/profile.css">
+</head>
+<body>
+  <%- include('templates/header') %>
+
+  <div class="container">
+    <div class="profile-info">
+      <div class="profile-picture">
+        <div class="profile-bar"></div>
+        <img src="/web/uploads/perfil/<%= usuario.fotoPerfil %>" alt="Foto de perfil">
+        <form action="/cambiar_foto" method="POST" enctype="multipart/form-data" >
+          <input type="file" name="nuevaFotoPerfil" accept="image/*" class="SelectImg">
+          <button type="submit" class="cambiarImg">Cambiar Foto de Perfil</button>
+        </form>
+      </div>
+      <div class="user-box">
+        <div class="user-info">
+          <h2><%= usuario.nombre %></h2>
+          <div class="user-details">
+            <p><strong>Nombre de usuario:</strong> <%= usuario.username %></p>
+            <p><strong>Sexo:</strong> <%= usuario.sexo %></p>
+            <p><strong>Edad:</strong> <%= usuario.edad %></p>
+            <p><strong>Tipo de usuario:</strong> <%= usuario.tipoUsuario %></p>
+            <% if (usuario.tipoUsuario === 'Administrador') { %>
+              <p><strong>Clave Especial:</strong> <%= usuario.claveEspecial %></p>
+            <% } %>
+          </div>
+        </div>
+        <div class="buttons">
+          <button class="profile-button"><a href="/subir_productos">Subir Productos</a></button>
+          <form action="/cerrar_sesion" method="POST">
+            <button class="profile-button" type="submit">Cerrar Sesión</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <%- include('templates/footer') %>
+</body>
+</html>
