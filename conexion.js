@@ -1,22 +1,35 @@
-const mongoose = require('mongoose');
+const Sequelize = require('sequelize');
 require('dotenv').config();
 
-const dbURI = process.env.DB_MONGODB_URI;
-
-mongoose.connect(dbURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true, // Utilizar createIndexes en Mongoose 7.x
+const sequelize = new Sequelize({
+  dialect: 'mysql',  // Puedes ajustar esto según tu base de datos
+  host: process.env.DB_HOST,
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
+  // ... otras opciones de configuración
 });
 
-const db = mongoose.connection;
-
-db.on('error', (error) => {
-  console.error('Error al conectar a MongoDB:', error);
+// Definición del modelo Producto
+const Producto = sequelize.define('Producto', {
+  // Definición de atributos del producto
+  nombre: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  descripcion: {
+    type: Sequelize.TEXT,
+    allowNull: true,
+  },
+  // ... otros atributos
 });
 
-db.once('open', () => {
-  console.log('Conectado a MongoDB');
+// Sincroniza el modelo con la base de datos (esto puede variar dependiendo de tu flujo de trabajo)
+sequelize.sync().then(() => {
+  console.log('Modelos sincronizados');
+}).catch((error) => {
+  console.error('Error al sincronizar modelos:', error);
 });
 
-module.exports = db;
+// Exporta el modelo Producto y sequelize para su uso en otros módulos
+module.exports = { Producto, sequelize };
