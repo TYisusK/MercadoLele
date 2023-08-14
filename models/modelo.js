@@ -3,7 +3,44 @@ const Sequelize = require('sequelize');
 module.exports = function(conexion) {
   // Modelo de Usuarios
   const Usuario = conexion.define('Usuario', {
-    // Definición de atributos...
+    id: {
+      type: Sequelize.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    nombre: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    username: {
+      type: Sequelize.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    sexo: {
+      type: Sequelize.ENUM('Masculino', 'Femenino', 'Otro'),
+      allowNull: false,
+    },
+    edad: {
+      type: Sequelize.INTEGER,
+      allowNull: false,
+    },
+    contraseña: {
+      type: Sequelize.STRING,
+      allowNull: false,
+    },
+    fotoPerfil: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
+    tipoUsuario: {
+      type: Sequelize.ENUM('Normal', 'Administrador'),
+      allowNull: false,
+    },
+    claveEspecial: {
+      type: Sequelize.STRING,
+      allowNull: true,
+    },
   });
 
   // Modelo de Productos
@@ -31,7 +68,9 @@ module.exports = function(conexion) {
     },
   });
 
-  // No establecemos relaciones de clave foránea en este caso
+  // Establecer relaciones entre los modelos
+  Usuario.hasMany(Producto, { foreignKey: 'idVendedor' });
+  Producto.belongsTo(Usuario, { foreignKey: 'idVendedor' });
 
   return {
     Usuario,
