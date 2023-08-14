@@ -62,7 +62,7 @@ ruta.post('/registrarse', uploadPerfil.single('fotoPerfil'), async function(req,
     }
 
     // Crea un nuevo usuario con los datos proporcionados y guarda en la base de datos
-    await Usuario.create({
+    const usuarioCreado = await Usuario.create({
       nombre: nombre,
       username: username,
       sexo: sexo,
@@ -72,17 +72,17 @@ ruta.post('/registrarse', uploadPerfil.single('fotoPerfil'), async function(req,
       tipoUsuario: tipoUsuario,
     });
 
+    console.log('Usuario registrado:', usuarioCreado); // Agregar un registro de éxito
+
     // Redirige al inicio de sesión después de registrar al usuario
     res.redirect("/iniciar_sesion");
   } catch (error) {
     console.error('Error al registrar el usuario:', error);
+    console.log('Error detallado:', error); // Agregar un registro detallado del error
     res.status(500).send('Error interno del servidor');
   }
 });
 
-// ... (resto del código)
-
-module.exports = ruta;
 
 
 
